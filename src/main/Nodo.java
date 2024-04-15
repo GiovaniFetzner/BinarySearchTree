@@ -7,29 +7,29 @@ public class Nodo {
 	private Nodo leftChild;
 	private Nodo rightChild;
 	private Nodo parent;
-
-	public Nodo(int valor) {
-		super();
+	
+	public Nodo(String key, int valor) {
+		this.key = key;
 		this.value = valor;
 		this.leftChild = null;
 		this.rightChild = null;
 		this.parent = null;
 	}
 
-	public void add(int valor) {
-		if (this.value > valor) {
+	public void add(String key, int value) {
+		if (this.value > value) {
 			if (leftChild == null) {
-				setLeftChild(new Nodo(valor));
+				setLeftChild(new Nodo(key, value));
 				leftChild.parent = this;
 			} else {
-				leftChild.add(valor);
+				leftChild.add(key, value);
 			}
 		} else {
 			if (rightChild == null) {
-				setRightChild(new Nodo(valor));
+				setRightChild(new Nodo(key, value));
 				rightChild.parent = this;
 			} else {
-				rightChild.add(valor);
+				rightChild.add(key, value);
 			}
 		}
 
@@ -113,11 +113,27 @@ public class Nodo {
 	    }
 	}
 
-	private void printInOrder(Nodo raiz) {
-		if (raiz != null) {
-			printInOrder(raiz.getLeftChild());
-			System.out.print(raiz.getValor() + " ");
-			printInOrder(raiz.getRightChild());
+	public void printPreOrder(Nodo raiz) {
+		if(raiz != null) {
+			System.out.println(raiz.value);
+			printPreOrder(raiz.leftChild);
+			printPreOrder(raiz.rightChild);
+		}
+	}
+	
+	public void printInOrder(Nodo raiz) {
+		if(raiz != null) {
+			printInOrder(raiz.leftChild);
+			System.out.println(raiz.value);
+			printInOrder(raiz.rightChild);
+		}
+	}
+	
+	public void printPostOrder(Nodo raiz) {
+		if(raiz != null) {
+			printInOrder(raiz.leftChild);
+			printInOrder(raiz.rightChild);
+			System.out.println(raiz.value);
 		}
 	}
 
