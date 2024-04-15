@@ -2,22 +2,22 @@ package main;
 
 public class Nodo {
 
-	private String chave;
-	private int valor;
+	private String key;
+	private int value;
 	private Nodo leftChild;
 	private Nodo rightChild;
 	private Nodo parent;
 
 	public Nodo(int valor) {
 		super();
-		this.valor = valor;
+		this.value = valor;
 		this.leftChild = null;
 		this.rightChild = null;
 		this.parent = null;
 	}
 
 	public void add(int valor) {
-		if (this.valor > valor) {
+		if (this.value > valor) {
 			if (leftChild == null) {
 				setLeftChild(new Nodo(valor));
 				leftChild.parent = this;
@@ -36,11 +36,11 @@ public class Nodo {
 	}
 	
 	public boolean search(int valor) {
-	    if (this.valor == valor) {
+	    if (this.value == valor) {
 	        return true;  
-	    } else if (this.valor > valor && leftChild != null) {
+	    } else if (this.value > valor && leftChild != null) {
 	        return leftChild.search(valor);  
-	    } else if (this.valor < valor && rightChild != null) {
+	    } else if (this.value < valor && rightChild != null) {
 	        return rightChild.search(valor); 
 	    }
 	    return false;
@@ -52,11 +52,11 @@ public class Nodo {
 	}
 
 	public int getValor() {
-		return valor;
+		return value;
 	}
 
 	public void setValor(int valor) {
-		this.valor = valor;
+		this.value = valor;
 	}
 
 	public Nodo getLeftChild() {
@@ -122,10 +122,10 @@ public class Nodo {
 	}
 
 	public String getChave() {
-		return chave;
+		return key;
 	}
 
 	public void setChave(String chave) {
-		this.chave = chave;
+		this.key = chave;
 	}
 }
