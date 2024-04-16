@@ -45,10 +45,13 @@ public class Nodo {
 	    }
 	    return false;
 	}
-
-
-	private int compareItens(int left, int right) {
-		return left - right; // Se esquerda maior, retorna positivo. Senão o valor da direita é maior
+	
+	public int buscarMin(Nodo root) {
+		if(root.leftChild == null) {
+			return root.getValor();
+		}else {
+			return buscarMin(root.leftChild);
+		}
 	}
 
 	public int getValor() {

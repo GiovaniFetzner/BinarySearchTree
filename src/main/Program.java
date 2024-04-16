@@ -1,17 +1,18 @@
 package main;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Program {
 
 	public static void main(String[] args) {
-		Nodo raiz = new Nodo("A", 50);
-		raiz.add("B", 49);
-		raiz.add("C", 52);
+		Nodo raiz = new Nodo("A", 82); //((int) (Math.random() * 100) + 1)
+		raiz.add("B", 47);
+		raiz.add("C", 53);
 		raiz.add("D", 48);
-		raiz.add("E", 51);
+		raiz.add("X", 30);
 		raiz.printTree();
 		System.out.println(raiz.search(48));
 		System.out.println("\n" + "PreOrdem:");
@@ -23,12 +24,28 @@ public class Program {
 
 		System.out.println("\nTeste de retorno do StringBuilder:");
 		System.out.println(raiz.printGraphviz(raiz, new StringBuilder()));
+		printSVG(raiz);
 		System.out.println("Escrita no .txt finalizada");
+		
+		System.out.println("Buscar valor minino da BST: " + raiz.buscarMin(raiz));
+		System.out.println("Buscar valor 30 na BST: " + raiz.search(30));
+		
+		
+		
+		
 	}
 
 	private static void printSVG(Nodo root) {
 
 		String path = "C:\\Program Files\\Graphviz\\GraphvizArquivos\\BinarySearchTree.txt";
+		File file = new File(path);
+		if(!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				System.out.println("Erro ao criar arquivo !");
+			}
+		}
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(path));
 			writer.append("digraph ArvoreBinaria {");
