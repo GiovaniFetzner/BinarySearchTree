@@ -31,6 +31,11 @@ public class Program {
 		System.out.println("Buscar valor 30 na BST: " + raiz.search(30));
 		
 		
+		System.out.println("Delecao da folha '48' " + raiz.simpleDelete(48));
+		printSVG(raiz);
+		
+		
+		
 		
 		
 	}

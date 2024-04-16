@@ -58,8 +58,30 @@ public class Nodo {
 		return leftChild == null && rightChild == null;
 	}
 	
-	public boolean removeCoping() {
-		return false;
+	private Nodo searchNode(int value) {
+		if (this.value == value) {
+			return this;  
+		} else if (this.value > value && leftChild != null) {
+			return leftChild.searchNode(value);  
+		} else if (this.value < value && rightChild != null) {
+			return rightChild.searchNode(value); 
+		}
+		return null;
+	}
+	
+	public boolean simpleDelete(int value) {
+	    Nodo nodeToDelete = searchNode(value);
+	    if (nodeToDelete != null) {
+	        if (nodeToDelete.parent != null) {
+	            if (nodeToDelete.parent.leftChild == nodeToDelete) {
+	                nodeToDelete.parent.leftChild = null;
+	            } else {
+	                nodeToDelete.parent.rightChild = null;
+	            }
+	        }
+	        return true;
+	    }
+	    return false; 
 	}
 
  	public void printTree() {
