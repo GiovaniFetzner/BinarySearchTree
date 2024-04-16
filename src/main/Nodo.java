@@ -137,6 +137,20 @@ public class Nodo {
 		}
 	}
 
+	public StringBuilder printGraphviz(Nodo raiz, StringBuilder text) {
+	    if (raiz != null) {
+	        if (raiz.getLeftChild() != null) {
+	            text.append(raiz.getValor()).append(" -> ").append(raiz.getLeftChild().getValor()).append("\n");
+	        }
+	        if (raiz.getRightChild() != null) {
+	            text.append(raiz.getValor()).append(" -> ").append(raiz.getRightChild().getValor()).append("\n");
+	        }
+	        printGraphviz(raiz.getLeftChild(), text);
+	        printGraphviz(raiz.getRightChild(), text);
+	    }
+	    return text;
+	}
+	
 	public String getChave() {
 		return key;
 	}
@@ -144,4 +158,5 @@ public class Nodo {
 	public void setChave(String chave) {
 		this.key = chave;
 	}
+
 }

@@ -15,18 +15,19 @@ public class Program {
 		raiz.printTree();
 		System.out.println(raiz.search(48));
 		System.out.println("\n" + "PreOrdem:");
-		raiz.printPreOrder(raiz);	
+		raiz.printPreOrder(raiz);
 		System.out.println("\n" + "InOrdem:");
 		raiz.printInOrder(raiz);
 		System.out.println("\n" + "PostOrdem:");
 		raiz.printPostOrder(raiz);
-		
-		System.out.println("Teste de escrita no arquivo");
-		printPreOrderSVG(raiz);
+
+		System.out.println("\nTeste de retorno do StringBuilder:");
+		System.out.println(raiz.printGraphviz(raiz, new StringBuilder()));
+		System.out.println("Escrita no .txt finalizada");
 	}
-	
-	private static void printPreOrderSVG(Nodo root) {
-		
+
+	private static void printSVG(Nodo root) {
+
 		String path = "C:\\Program Files\\Graphviz\\GraphvizArquivos\\BinarySearchTree.txt";
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(path));
@@ -38,21 +39,21 @@ public class Program {
 			writer.newLine();
 			writer.append("    edge [color=\"black\"];");
 			writer.newLine();
-			
-			
-			writer.append("A -> C");
-			writer.newLine();
-			writer.append("A -> B");
-			
+
+			StringBuilder text = new StringBuilder();
+			writer.append(root.printGraphviz(root, text));
+
 			writer.newLine();
 			writer.append("}");
 			writer.close();
+
 			
-			System.out.println("Escrita preOrder no .txt finalizada");
-			
+
 		} catch (IOException e) {
 			System.out.println("Erro no arquivo!");
 		}
 	}
+
+	
 
 }
