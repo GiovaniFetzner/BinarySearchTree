@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Program {
 
 	public static void main(String[] args) {
-		Nodo raiz = new Nodo("A", 82); //((int) (Math.random() * 100) + 1)
+		Node raiz = new Node("A", 82); //((int) (Math.random() * 100) + 1)
 		raiz.add("B", 47);
 		raiz.add("C", 53);
 		raiz.add("D", 48);
@@ -35,16 +35,16 @@ public class Program {
 //		System.out.println("Delecao da folha '48' " + raiz.simpleDelete(48));
 //		printSVG(raiz);
 		
-		System.out.println("Delecao da folha '53' " + raiz.oneChildDelete(53));
+		System.out.println("Delecao da folha '53' " + raiz.deleteNode(53));
 		printSVG(raiz);
-		System.out.println("Delecao da folha '28' " + raiz.oneChildDelete(28));
+		System.out.println("Delecao da folha '28' " + raiz.deleteNode(28));
 		printSVG(raiz);
 				
 		
 		
 	}
 
-	private static void printSVG(Nodo root) {
+	private static void printSVG(Node root) {
 
 		String path = "C:\\Program Files\\Graphviz\\GraphvizArquivos\\BinarySearchTree.txt";
 		File file = new File(path);

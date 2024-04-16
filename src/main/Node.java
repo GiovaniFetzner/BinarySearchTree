@@ -1,14 +1,14 @@
 package main;
 
-public class Nodo {
+public class Node {
 
 	private String key;
 	private int value;
-	private Nodo leftChild;
-	private Nodo rightChild;
-	private Nodo parent;
+	private Node leftChild;
+	private Node rightChild;
+	private Node parent;
 
-	public Nodo(String key, int value) {
+	public Node(String key, int value) {
 		this.key = key;
 		this.value = value;
 		this.leftChild = null;
@@ -19,14 +19,14 @@ public class Nodo {
 	public void add(String key, int value) {
 		if (this.value > value) {
 			if (leftChild == null) {
-				setLeftChild(new Nodo(key, value));
+				setLeftChild(new Node(key, value));
 				leftChild.parent = this;
 			} else {
 				leftChild.add(key, value);
 			}
 		} else {
 			if (rightChild == null) {
-				setRightChild(new Nodo(key, value));
+				setRightChild(new Node(key, value));
 				rightChild.parent = this;
 			} else {
 				rightChild.add(key, value);
@@ -46,7 +46,7 @@ public class Nodo {
 		return false;
 	}
 
-	public int searchMin(Nodo root) {
+	public int searchMin(Node root) {
 		if(root.leftChild == null) {
 			return root.getValue();
 		}else {
@@ -58,7 +58,7 @@ public class Nodo {
 		return leftChild == null && rightChild == null;
 	}
 	
-	private Nodo searchNode(int value) {
+	private Node searchNode(int value) {
 		if (this.value == value) {
 			return this;  
 		} else if (this.value > value && leftChild != null) {
@@ -69,30 +69,29 @@ public class Nodo {
 		return null;
 	}
 	
-	public boolean simpleDelete(int value) {
-	    Nodo nodeToDelete = searchNode(value);
-	    if (nodeToDelete != null) {
-	        if (nodeToDelete.parent != null) {
+	private boolean simpleDelete(int value) {
+	    Node nodeToDelete = searchNode(value);
+	    if (nodeToDelete != null && nodeToDelete.parent != null) {
+	    	
 	            if (nodeToDelete.parent.leftChild == nodeToDelete) {
 	                nodeToDelete.parent.leftChild = null;
 	            } else {
 	                nodeToDelete.parent.rightChild = null;
 	            }
+	            return true;
 	        }
-	        return true;
-	    }
+	   
 	    return false; 
 	}
 	
-	public boolean oneChildDelete(int value) {
-	    Nodo nodeToDelete = searchNode(value);
+	private boolean oneChildDelete(int value) {
+	    Node nodeToDelete = searchNode(value);
 	    if (nodeToDelete != null && nodeToDelete.parent != null) {
 	        if (nodeToDelete.leftChild != null && nodeToDelete.rightChild != null) {
-
 	            return false;
 	        }
 
-	        Nodo childNode = nodeToDelete.leftChild != null ? nodeToDelete.leftChild : nodeToDelete.rightChild;
+	        Node childNode = nodeToDelete.leftChild != null ? nodeToDelete.leftChild : nodeToDelete.rightChild;
 	        if (nodeToDelete.parent.leftChild == nodeToDelete) {
 	            nodeToDelete.parent.leftChild = childNode;
 	        } else {
@@ -106,6 +105,21 @@ public class Nodo {
 	    }
 	    return false;
 	}
+	
+	public boolean deleteNode(int value) {
+		Node nodeToDelete = searchNode(value);
+		if(nodeToDelete != null) {
+			if(nodeToDelete.isLeaf()) {
+				nodeToDelete.simpleDelete(value);
+			}else if(nodeToDelete.leftChild != null && nodeToDelete.rightChild != null) {
+				//Implementacao do delete com dois filhos
+			}else {
+				nodeToDelete.oneChildDelete(value);
+			}
+		}
+		return false;
+		
+	}
 
 	
 	public void printTree() {
@@ -117,7 +131,7 @@ public class Nodo {
 		}
 	}
 
-	private void printTreeHelper(Nodo node, int depth) {
+	private void printTreeHelper(Node node, int depth) {
 		if (node != null) {
 			printTreeHelper(node.getRightChild(), depth + 1);
 			for (int i = 0; i < depth; i++) {
@@ -128,7 +142,7 @@ public class Nodo {
 		}
 	}
 
-	public void printPreOrder(Nodo root) {
+	public void printPreOrder(Node root) {
 		if(root != null) {
 			System.out.println(root.value);
 			printPreOrder(root.leftChild);
@@ -136,7 +150,7 @@ public class Nodo {
 		}
 	}
 
-	public void printInOrder(Nodo root) {
+	public void printInOrder(Node root) {
 		if(root != null) {
 			printInOrder(root.leftChild);
 			System.out.println(root.value);
@@ -144,7 +158,7 @@ public class Nodo {
 		}
 	}
 
-	public void printPostOrder(Nodo root) {
+	public void printPostOrder(Node root) {
 		if(root != null) {
 			printInOrder(root.leftChild);
 			printInOrder(root.rightChild);
@@ -152,7 +166,7 @@ public class Nodo {
 		}
 	}
 
-	public StringBuilder printGraphviz(Nodo root, StringBuilder text) {
+	public StringBuilder printGraphviz(Node root, StringBuilder text) {
 		if (root != null) {
 			if (root.getLeftChild() != null) {
 				text.append(root.getValue()).append(" -> ").append(root.getLeftChild().getValue()).append("\n");
@@ -174,33 +188,33 @@ public class Nodo {
 		this.value = value;
 	}
 
-	public Nodo getLeftChild() {
+	public Node getLeftChild() {
 		return leftChild;
 	}
 
-	public Nodo getRightChild() {
+	public Node getRightChild() {
 		return rightChild;
 	}
 
-	public void setLeftChild(Nodo leftChild) {
+	public void setLeftChild(Node leftChild) {
 		this.leftChild = leftChild;
 		if (leftChild != null) {
 			leftChild.setParent(this);
 		}
 	}
 
-	public void setRightChild(Nodo rightChild) {
+	public void setRightChild(Node rightChild) {
 		this.rightChild = rightChild;
 		if (rightChild != null) {
 			rightChild.setParent(this);
 		}
 	}
 
-	public void setParent(Nodo parent) {
+	public void setParent(Node parent) {
 		this.parent = parent;
 	}
 
-	public Nodo getParent() {
+	public Node getParent() {
 		return parent;
 	}
 
