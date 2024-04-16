@@ -13,7 +13,7 @@ public class Program {
 		raiz.add("C", 53);
 		raiz.add("D", 48);
 		raiz.add("X", 30);
-		raiz.printTree();
+		System.out.println(raiz.toString());
 		System.out.println(raiz.search(48));
 		System.out.println("\n" + "PreOrdem:");
 		raiz.printPreOrder(raiz);
@@ -27,7 +27,7 @@ public class Program {
 		printSVG(raiz);
 		System.out.println("Escrita no .txt finalizada");
 		
-		System.out.println("Buscar valor minino da BST: " + raiz.buscarMin(raiz));
+		System.out.println("Buscar valor minino da BST: " + raiz.searchMin(raiz));
 		System.out.println("Buscar valor 30 na BST: " + raiz.search(30));
 		
 		

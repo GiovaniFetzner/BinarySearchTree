@@ -7,10 +7,10 @@ public class Nodo {
 	private Nodo leftChild;
 	private Nodo rightChild;
 	private Nodo parent;
-	
-	public Nodo(String key, int valor) {
+
+	public Nodo(String key, int value) {
 		this.key = key;
-		this.value = valor;
+		this.value = value;
 		this.leftChild = null;
 		this.rightChild = null;
 		this.parent = null;
@@ -34,32 +34,98 @@ public class Nodo {
 		}
 
 	}
-	
-	public boolean search(int valor) {
-	    if (this.value == valor) {
-	        return true;  
-	    } else if (this.value > valor && leftChild != null) {
-	        return leftChild.search(valor);  
-	    } else if (this.value < valor && rightChild != null) {
-	        return rightChild.search(valor); 
-	    }
-	    return false;
+
+	public boolean search(int value) {
+		if (this.value == value) {
+			return true;  
+		} else if (this.value > value && leftChild != null) {
+			return leftChild.search(value);  
+		} else if (this.value < value && rightChild != null) {
+			return rightChild.search(value); 
+		}
+		return false;
 	}
-	
-	public int buscarMin(Nodo root) {
+
+	public int searchMin(Nodo root) {
 		if(root.leftChild == null) {
-			return root.getValor();
+			return root.getValue();
 		}else {
-			return buscarMin(root.leftChild);
+			return searchMin(root.leftChild);
 		}
 	}
 
-	public int getValor() {
+	public boolean isLeaf() {
+		return leftChild == null && rightChild == null;
+	}
+	
+	public boolean removeCoping() {
+		return false;
+	}
+
+ 	public void printTree() {
+		if (this.parent != null) {
+			System.out.println("Voce deve chamar esse metodo no no raiz!!!");
+		} else {
+			System.out.println("Arvore binaria:");
+			printTreeHelper(this, 0);
+		}
+	}
+
+	private void printTreeHelper(Nodo node, int depth) {
+		if (node != null) {
+			printTreeHelper(node.getRightChild(), depth + 1);
+			for (int i = 0; i < depth; i++) {
+				System.out.print("   ");
+			}
+			System.out.println(node.getValue());
+			printTreeHelper(node.getLeftChild(), depth + 1);
+		}
+	}
+
+	public void printPreOrder(Nodo root) {
+		if(root != null) {
+			System.out.println(root.value);
+			printPreOrder(root.leftChild);
+			printPreOrder(root.rightChild);
+		}
+	}
+
+	public void printInOrder(Nodo root) {
+		if(root != null) {
+			printInOrder(root.leftChild);
+			System.out.println(root.value);
+			printInOrder(root.rightChild);
+		}
+	}
+
+	public void printPostOrder(Nodo root) {
+		if(root != null) {
+			printInOrder(root.leftChild);
+			printInOrder(root.rightChild);
+			System.out.println(root.value);
+		}
+	}
+
+	public StringBuilder printGraphviz(Nodo root, StringBuilder text) {
+		if (root != null) {
+			if (root.getLeftChild() != null) {
+				text.append(root.getValue()).append(" -> ").append(root.getLeftChild().getValue()).append("\n");
+			}
+			if (root.getRightChild() != null) {
+				text.append(root.getValue()).append(" -> ").append(root.getRightChild().getValue()).append("\n");
+			}
+			printGraphviz(root.getLeftChild(), text);
+			printGraphviz(root.getRightChild(), text);
+		}
+		return text;
+	}
+
+	public int getValue() {
 		return value;
 	}
 
-	public void setValor(int valor) {
-		this.value = valor;
+	public void setValue(int value) {
+		this.value = value;
 	}
 
 	public Nodo getLeftChild() {
@@ -92,74 +158,12 @@ public class Nodo {
 		return parent;
 	}
 
-	public boolean isLeaf() {
-		return leftChild == null && rightChild == null;
-	}
-
-	public void printTree() {
-	    if (this.parent != null) {
-	        System.out.println("Voce deve chamar esse metodo no no raiz!!!");
-	    } else {
-	        System.out.println("Arvore binaria:");
-	        printTreeHelper(this, 0);
-	    }
-	}
-
-	private void printTreeHelper(Nodo node, int depth) {
-	    if (node != null) {
-	        printTreeHelper(node.getRightChild(), depth + 1);
-	        for (int i = 0; i < depth; i++) {
-	            System.out.print("   ");
-	        }
-	        System.out.println(node.getValor());
-	        printTreeHelper(node.getLeftChild(), depth + 1);
-	    }
-	}
-
-	public void printPreOrder(Nodo raiz) {
-		if(raiz != null) {
-			System.out.println(raiz.value);
-			printPreOrder(raiz.leftChild);
-			printPreOrder(raiz.rightChild);
-		}
-	}
-	
-	public void printInOrder(Nodo raiz) {
-		if(raiz != null) {
-			printInOrder(raiz.leftChild);
-			System.out.println(raiz.value);
-			printInOrder(raiz.rightChild);
-		}
-	}
-	
-	public void printPostOrder(Nodo raiz) {
-		if(raiz != null) {
-			printInOrder(raiz.leftChild);
-			printInOrder(raiz.rightChild);
-			System.out.println(raiz.value);
-		}
-	}
-
-	public StringBuilder printGraphviz(Nodo raiz, StringBuilder text) {
-	    if (raiz != null) {
-	        if (raiz.getLeftChild() != null) {
-	            text.append(raiz.getValor()).append(" -> ").append(raiz.getLeftChild().getValor()).append("\n");
-	        }
-	        if (raiz.getRightChild() != null) {
-	            text.append(raiz.getValor()).append(" -> ").append(raiz.getRightChild().getValor()).append("\n");
-	        }
-	        printGraphviz(raiz.getLeftChild(), text);
-	        printGraphviz(raiz.getRightChild(), text);
-	    }
-	    return text;
-	}
-	
-	public String getChave() {
+	public String getKey() {
 		return key;
 	}
 
-	public void setChave(String chave) {
-		this.key = chave;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 }
