@@ -12,6 +12,7 @@ public class Program {
 		raiz.add("B", 47);
 		raiz.add("C", 53);
 		raiz.add("D", 48);
+		raiz.add("D", 28);
 		raiz.add("X", 30);
 		System.out.println(raiz.toString());
 		System.out.println(raiz.search(48));
@@ -31,11 +32,14 @@ public class Program {
 		System.out.println("Buscar valor 30 na BST: " + raiz.search(30));
 		
 		
-		System.out.println("Delecao da folha '48' " + raiz.simpleDelete(48));
+//		System.out.println("Delecao da folha '48' " + raiz.simpleDelete(48));
+//		printSVG(raiz);
+		
+		System.out.println("Delecao da folha '53' " + raiz.oneChildDelete(53));
 		printSVG(raiz);
-		
-		
-		
+		System.out.println("Delecao da folha '28' " + raiz.oneChildDelete(28));
+		printSVG(raiz);
+				
 		
 		
 	}

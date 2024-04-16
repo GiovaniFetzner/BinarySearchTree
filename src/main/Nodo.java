@@ -83,8 +83,32 @@ public class Nodo {
 	    }
 	    return false; 
 	}
+	
+	public boolean oneChildDelete(int value) {
+	    Nodo nodeToDelete = searchNode(value);
+	    if (nodeToDelete != null && nodeToDelete.parent != null) {
+	        if (nodeToDelete.leftChild != null && nodeToDelete.rightChild != null) {
 
- 	public void printTree() {
+	            return false;
+	        }
+
+	        Nodo childNode = nodeToDelete.leftChild != null ? nodeToDelete.leftChild : nodeToDelete.rightChild;
+	        if (nodeToDelete.parent.leftChild == nodeToDelete) {
+	            nodeToDelete.parent.leftChild = childNode;
+	        } else {
+	            nodeToDelete.parent.rightChild = childNode;
+	        }
+	        if (childNode != null) {
+	            childNode.parent = nodeToDelete.parent;
+	        }
+
+	        return true;
+	    }
+	    return false;
+	}
+
+	
+	public void printTree() {
 		if (this.parent != null) {
 			System.out.println("Voce deve chamar esse metodo no no raiz!!!");
 		} else {
