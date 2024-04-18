@@ -36,8 +36,12 @@ public class Program {
 
 		System.out.println("Pesquisas na arvore BST:");
 		
-		System.out.println("Busca valor 30: " + raiz.search(30));
-		System.out.println("Busca valor 31: " + raiz.search(31));
+		System.out.println("Busca valor 30 (existente): " + raiz.search(30));
+		System.out.println("Busca valor 31 (inexistente): " + raiz.search(31));
+		System.out.println();
+		System.out.println("Busca chave 'teste' (existente): " + raiz.search("teste"));
+		System.out.println("Busca chave 'brazil' (inexistente): " + raiz.search("brazil"));
+		
 		
 		
 	
