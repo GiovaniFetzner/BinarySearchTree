@@ -17,9 +17,10 @@ public class Program {
 		raiz.add("E", 28);
 		raiz.add("X", 30);
 		raiz.add("Y", 61);
-		raiz.add("Z", 54);
+		raiz.add("Z", 58);
 		raiz.add("W", 20);
 		raiz.add("U", 100);
+		raiz.add("V", 57);
 		System.out.println("\n" + "PreOrdem:");
 		raiz.printPreOrder(raiz);
 		System.out.println("\n" + "InOrdem:");
@@ -45,13 +46,16 @@ public class Program {
 		System.out.println("Maior valor da subarvore 47 (existente): " + raiz.searchMaxValue(new Node("B", 47)));
 		System.out.println("Maior valor da subarvore 200 (inexistente): " + raiz.searchMaxValue(new Node("brazil", 200)));
 		
-		System.out.println("Teste de remocao:");
+		/*System.out.println("Teste de remocao:");
 		System.out.println("Removendo uma folha - 20: " + raiz.deleteNode(20));
 		System.out.println("Removendo um nodo que possui um filho - 28: " + raiz.deleteNode(28));
-		
+		*/
 		System.out.println("Maior valor da subarvore esquerda do nodo 60: " + raiz.searchMaxValue(raiz.search(60).getLeftChild()));
 		
-		//System.out.println("Remocao do nodo 60: " + raiz.deleteNode(60));
+		System.out.println("Remocao do nodo 60: " + raiz.deleteNode(60));
+		System.out.println("Remocao do nodo 58: " + raiz.deleteNode(58));
+		System.out.println("Remocao do nodo 57: " + raiz.deleteNode(57));
+		System.out.println("Remocao do nodo 47: " + raiz.deleteNode(47));
 
 		printSVG(raiz);
 		System.out.println("Escrita no .txt finalizada");

@@ -58,26 +58,26 @@ public class Node {
 	}
 
 
-	public int searchMinValue(Node rootReference) {
+	public Node searchMinValue(Node rootReference) {
 		Node node = search(rootReference.value);
 		if(node == null) {
-			return Integer.MIN_VALUE;
+			return null;
 		}
 		if(node.leftChild == null) {
-			return node.getValue();
+			return node;
 		}else {
 			return searchMinValue(node.leftChild);
 		}
 	}
 	
 	
-	public int searchMaxValue(Node rootReference) {
+	public Node searchMaxValue(Node rootReference) {
 		Node node = search(rootReference.value);
 		if(node == null) {
-			return Integer.MIN_VALUE;
+			return null;
 		}
 		if(node.rightChild == null) {
-			return node.getValue();
+			return node;
 		}else {
 			return searchMaxValue(node.rightChild);
 		}
@@ -99,8 +99,8 @@ public class Node {
 	    return false; 
 	}
 	
-	private boolean oneChildDelete(int value) {
-	    Node nodeToDelete = search(value);
+	private boolean oneChildDelete(Node nodeToDelete) {
+		/* Node nodeToDelete = search(value); */
 	    if (nodeToDelete != null && nodeToDelete.parent != null) {
 	        if (nodeToDelete.leftChild != null && nodeToDelete.rightChild != null) {
 	            return false;
@@ -122,25 +122,21 @@ public class Node {
 	}
 	
 	private boolean copyDelete(Node nodeToDelete) {
-		//Node nodeToDelete = search(value); // Retirar essa parte e solicitar o nodo por parametro
 		if(nodeToDelete != null && nodeToDelete.parent != null) {
-			//Procurar o nodo de maior valor na subárvore esquerda
 			if(nodeToDelete.leftChild != null) {
-				Node auxiliar = search(searchMaxValue(nodeToDelete.leftChild));
+				Node auxiliar = searchMaxValue(nodeToDelete.leftChild);
+				int auxValue = auxiliar.getValue();
+				String auxKey = auxiliar.getKey();
 				
 				if(auxiliar.isLeaf()) {
-					nodeToDelete.setKey(auxiliar.getKey());
-					nodeToDelete.setValue(auxiliar.getValue());
-					nodeToDelete.leftChild.deleteNode(auxiliar.getValue());
-					return true;
+					leafDelete(auxiliar.getValue());
 				}else {
-					oneChildDelete(auxiliar.getValue());
-					return true;
+					oneChildDelete(auxiliar);
 				}
-			
-			}else {
-				oneChildDelete(value);
 				
+				nodeToDelete.setKey(auxKey);
+				nodeToDelete.setValue(auxValue);
+				return true;
 			}
 			
 		}
@@ -155,7 +151,7 @@ public class Node {
 			}else if(nodeToDelete.leftChild != null && nodeToDelete.rightChild != null) {
 				return copyDelete(nodeToDelete);
 			}else {
-				return nodeToDelete.oneChildDelete(value);
+				return nodeToDelete.oneChildDelete(nodeToDelete);
 			}
 		}
 		return false;
