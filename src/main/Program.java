@@ -52,11 +52,11 @@ public class Program {
 		*/
 		System.out.println("Maior valor da subarvore esquerda do nodo 60: " + raiz.searchMaxValue(raiz.search(60).getLeftChild()));
 		
-		System.out.println("Remocao do nodo 60: " + raiz.deleteNode(60));
+		/*System.out.println("Remocao do nodo 60: " + raiz.deleteNode(60));
 		System.out.println("Remocao do nodo 58: " + raiz.deleteNode(58));
 		System.out.println("Remocao do nodo 57: " + raiz.deleteNode(57));
 		System.out.println("Remocao do nodo 47: " + raiz.deleteNode(47));
-
+		*/
 		printSVG(raiz);
 		System.out.println("Escrita no .txt finalizada");
 		System.out.println("\n" + raiz.printGraphviz(raiz, new StringBuilder()));
@@ -65,7 +65,7 @@ public class Program {
 
 	private static void printSVG(Node root) {
 
-		String path = "C:\\Program Files\\Graphviz\\GraphvizArquivos\\BinarySearchTree.txt";
+		String path = "C:\\Users\\giova\\eclipse-workspace\\BinarySearchTree\\GraphvizArquivos\\BinarySearchTree.txt";
 		File file = new File(path);
 		if (!file.exists()) {
 			try {
