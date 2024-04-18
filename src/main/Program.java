@@ -20,8 +20,6 @@ public class Program {
 		raiz.add("Z", 54);
 		raiz.add("W", 20);
 		raiz.add("U", 100);
-		System.out.println(raiz.toString());
-		System.out.println(raiz.search(48));
 		System.out.println("\n" + "PreOrdem:");
 		raiz.printPreOrder(raiz);
 		System.out.println("\n" + "InOrdem:");
@@ -31,7 +29,7 @@ public class Program {
 
 		System.out.println("\nTeste de retorno do StringBuilder:");
 		System.out.println(raiz.printGraphviz(raiz, new StringBuilder()));
-		System.out.println("Escrita no .txt finalizada");
+		
 
 		System.out.println("Pesquisas na arvore BST:");
 		
@@ -49,10 +47,14 @@ public class Program {
 		
 		System.out.println("Teste de remocao:");
 		System.out.println("Removendo uma folha - 20: " + raiz.deleteNode(20));
+		System.out.println("Removendo um nodo que possui um filho - 28: " + raiz.deleteNode(28));
 		
-	
+		System.out.println("Maior valor da subarvore esquerda do nodo 60: " + raiz.searchMaxValue(raiz.search(60).getLeftChild()));
+		
+		//System.out.println("Remocao do nodo 60: " + raiz.deleteNode(60));
 
 		printSVG(raiz);
+		System.out.println("Escrita no .txt finalizada");
 		System.out.println("\n" + raiz.printGraphviz(raiz, new StringBuilder()));
 
 	}

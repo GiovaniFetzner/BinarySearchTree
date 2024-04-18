@@ -121,14 +121,25 @@ public class Node {
 	    return false;
 	}
 	
-	private boolean copyDelete(int value) {
-		Node nodeToDelete = search(value);
+	private boolean copyDelete(Node nodeToDelete) {
+		//Node nodeToDelete = search(value); // Retirar essa parte e solicitar o nodo por parametro
 		if(nodeToDelete != null && nodeToDelete.parent != null) {
 			//Procurar o nodo de maior valor na subárvore esquerda
 			if(nodeToDelete.leftChild != null) {
-				searchMaxValue(nodeToDelete.leftChild);
+				Node auxiliar = search(searchMaxValue(nodeToDelete.leftChild));
+				
+				if(auxiliar.isLeaf()) {
+					nodeToDelete.setKey(auxiliar.getKey());
+					nodeToDelete.setValue(auxiliar.getValue());
+					nodeToDelete.leftChild.deleteNode(auxiliar.getValue());
+					return true;
+				}else {
+					oneChildDelete(auxiliar.getValue());
+					return true;
+				}
+			
 			}else {
-				//valor do nó
+				oneChildDelete(value);
 				
 			}
 			
@@ -142,7 +153,7 @@ public class Node {
 			if(nodeToDelete.isLeaf()) {
 				return nodeToDelete.leafDelete(value);
 			}else if(nodeToDelete.leftChild != null && nodeToDelete.rightChild != null) {
-				//Implementacao do delete com dois filhos
+				return copyDelete(nodeToDelete);
 			}else {
 				return nodeToDelete.oneChildDelete(value);
 			}
