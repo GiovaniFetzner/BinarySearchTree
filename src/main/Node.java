@@ -82,29 +82,10 @@ public class Node {
 			return searchMaxValue(node.rightChild);
 		}
 	}
-	
-	private int searchMaxValue(String key) {
-	    Node node = search(key);
-	    if (node.rightChild == null) {
-	        return node.getValue();
-	    } else {
-	    	return searchMaxValue(node.rightChild.key);
-	    }
-	}
-	
-	public Node searchNode(int value) {
-		if (this.value == value) {
-			return this;  
-		} else if (this.value > value && leftChild != null) {
-			return leftChild.searchNode(value);  
-		} else if (this.value < value && rightChild != null) {
-			return rightChild.searchNode(value); 
-		}
-		return null;
-	}
+
 		
 	private boolean leafDelete(int value) {
-	    Node nodeToDelete = searchNode(value);
+	    Node nodeToDelete = search(value);
 	    if (nodeToDelete != null && nodeToDelete.parent != null) {
 	    	
 	            if (nodeToDelete.parent.leftChild == nodeToDelete) {
@@ -119,7 +100,7 @@ public class Node {
 	}
 	
 	private boolean oneChildDelete(int value) {
-	    Node nodeToDelete = searchNode(value);
+	    Node nodeToDelete = search(value);
 	    if (nodeToDelete != null && nodeToDelete.parent != null) {
 	        if (nodeToDelete.leftChild != null && nodeToDelete.rightChild != null) {
 	            return false;
@@ -141,11 +122,11 @@ public class Node {
 	}
 	
 	private boolean copyDelete(int value) {
-		Node nodeToDelete = searchNode(value);
+		Node nodeToDelete = search(value);
 		if(nodeToDelete != null && nodeToDelete.parent != null) {
 			//Procurar o nodo de maior valor na subárvore esquerda
 			if(nodeToDelete.leftChild != null) {
-				searchMaxValue(nodeToDelete.leftChild.key);
+				searchMaxValue(nodeToDelete.leftChild);
 			}else {
 				//valor do nó
 				
@@ -156,7 +137,7 @@ public class Node {
 	}
 	
 	public boolean deleteNode(int value) {
-		Node nodeToDelete = searchNode(value);
+		Node nodeToDelete = search(value);
 		if(nodeToDelete != null) {
 			if(nodeToDelete.isLeaf()) {
 				return nodeToDelete.leafDelete(value);

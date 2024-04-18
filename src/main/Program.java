@@ -31,7 +31,6 @@ public class Program {
 
 		System.out.println("\nTeste de retorno do StringBuilder:");
 		System.out.println(raiz.printGraphviz(raiz, new StringBuilder()));
-		printSVG(raiz);
 		System.out.println("Escrita no .txt finalizada");
 
 		System.out.println("Pesquisas na arvore BST:");
@@ -48,10 +47,12 @@ public class Program {
 		System.out.println("Maior valor da subarvore 47 (existente): " + raiz.searchMaxValue(new Node("B", 47)));
 		System.out.println("Maior valor da subarvore 200 (inexistente): " + raiz.searchMaxValue(new Node("brazil", 200)));
 		
-		
+		System.out.println("Teste de remocao:");
+		System.out.println("Removendo uma folha - 20: " + raiz.deleteNode(20));
 		
 	
 
+		printSVG(raiz);
 		System.out.println("\n" + raiz.printGraphviz(raiz, new StringBuilder()));
 
 	}
