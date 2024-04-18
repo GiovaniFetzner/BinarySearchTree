@@ -71,12 +71,17 @@ public class Node {
 	}
 	
 	
-	/*
-	 * private int searchMaxValue(int value) { if(!search(value)) { return
-	 * Integer.MIN_VALUE; } Node node = searchNode(value); if (node.rightChild ==
-	 * null) { return node.getValue(); } else { return
-	 * searchMaxValue(node.rightChild.key); } }
-	 */
+	public int searchMaxValue(Node rootReference) {
+		Node node = search(rootReference.value);
+		if(node == null) {
+			return Integer.MIN_VALUE;
+		}
+		if(node.rightChild == null) {
+			return node.getValue();
+		}else {
+			return searchMaxValue(node.rightChild);
+		}
+	}
 	
 	private int searchMaxValue(String key) {
 	    Node node = search(key);

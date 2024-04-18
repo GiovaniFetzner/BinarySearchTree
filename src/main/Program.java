@@ -42,8 +42,11 @@ public class Program {
 		System.out.println("Busca chave 'teste' (existente): " + raiz.search("teste"));
 		System.out.println("Busca chave 'brazil' (inexistente): " + raiz.search("brazil"));
 		System.out.println();
-		System.out.println("Busca menor valor da subarvore 60 (existente): " + raiz.searchMinValue(teste));
-		System.out.println("Busca menor valor da subarvore 200 (inexistente): " + raiz.searchMinValue(new Node("brazil", 200)));
+		System.out.println("Menor valor da subarvore 60 (existente): " + raiz.searchMinValue(teste));
+		System.out.println("Menor valor da subarvore 200 (inexistente): " + raiz.searchMinValue(new Node("brazil", 200)));
+		System.out.println();
+		System.out.println("Maior valor da subarvore 47 (existente): " + raiz.searchMaxValue(new Node("B", 47)));
+		System.out.println("Maior valor da subarvore 200 (inexistente): " + raiz.searchMaxValue(new Node("brazil", 200)));
 		
 		
 		
