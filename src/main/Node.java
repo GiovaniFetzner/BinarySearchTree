@@ -58,11 +58,15 @@ public class Node {
 	}
 
 
-	public int searchMinValue(Node root) {
-		if(root.leftChild == null) {
-			return root.getValue();
+	public int searchMinValue(Node rootReference) {
+		Node node = search(rootReference.value);
+		if(node == null) {
+			return Integer.MIN_VALUE;
+		}
+		if(node.leftChild == null) {
+			return node.getValue();
 		}else {
-			return searchMinValue(root.leftChild);
+			return searchMinValue(node.leftChild);
 		}
 	}
 	
