@@ -35,30 +35,55 @@ public class Node {
 
 	}
 
-	public boolean search(int value) {
+	public Node search(int value) {
 		if (this.value == value) {
-			return true;  
+			return this;  
 		} else if (this.value > value && leftChild != null) {
 			return leftChild.search(value);  
 		} else if (this.value < value && rightChild != null) {
 			return rightChild.search(value); 
 		}
-		return false;
+		return null;
+	}
+	
+	public Node search(String key) {
+	    if (this.key.equals(key)) {
+	        return this;
+	    } 
+	    Node foundInLeft = leftChild != null ? leftChild.search(key) : null;
+	    if (foundInLeft != null) {
+	        return foundInLeft;
+	    } 
+	    return rightChild != null ? rightChild.search(key) : null;
 	}
 
-	public int searchMin(Node root) {
+
+	public int searchMinValue(Node root) {
 		if(root.leftChild == null) {
 			return root.getValue();
 		}else {
-			return searchMin(root.leftChild);
+			return searchMinValue(root.leftChild);
 		}
 	}
-
-	public boolean isLeaf() {
-		return leftChild == null && rightChild == null;
+	
+	
+	/*
+	 * private int searchMaxValue(int value) { if(!search(value)) { return
+	 * Integer.MIN_VALUE; } Node node = searchNode(value); if (node.rightChild ==
+	 * null) { return node.getValue(); } else { return
+	 * searchMaxValue(node.rightChild.key); } }
+	 */
+	
+	private int searchMaxValue(String key) {
+	    Node node = search(key);
+	    if (node.rightChild == null) {
+	        return node.getValue();
+	    } else {
+	    	return searchMaxValue(node.rightChild.key);
+	    }
 	}
 	
-	private Node searchNode(int value) {
+	public Node searchNode(int value) {
 		if (this.value == value) {
 			return this;  
 		} else if (this.value > value && leftChild != null) {
@@ -68,8 +93,8 @@ public class Node {
 		}
 		return null;
 	}
-	
-	private boolean simpleDelete(int value) {
+		
+	private boolean leafDelete(int value) {
 	    Node nodeToDelete = searchNode(value);
 	    if (nodeToDelete != null && nodeToDelete.parent != null) {
 	    	
@@ -106,21 +131,35 @@ public class Node {
 	    return false;
 	}
 	
+	private boolean copyDelete(int value) {
+		Node nodeToDelete = searchNode(value);
+		if(nodeToDelete != null && nodeToDelete.parent != null) {
+			//Procurar o nodo de maior valor na subárvore esquerda
+			if(nodeToDelete.leftChild != null) {
+				searchMaxValue(nodeToDelete.leftChild.key);
+			}else {
+				//valor do nó
+				
+			}
+			
+		}
+		return false;
+	}
+	
 	public boolean deleteNode(int value) {
 		Node nodeToDelete = searchNode(value);
 		if(nodeToDelete != null) {
 			if(nodeToDelete.isLeaf()) {
-				nodeToDelete.simpleDelete(value);
+				return nodeToDelete.leafDelete(value);
 			}else if(nodeToDelete.leftChild != null && nodeToDelete.rightChild != null) {
 				//Implementacao do delete com dois filhos
 			}else {
-				nodeToDelete.oneChildDelete(value);
+				return nodeToDelete.oneChildDelete(value);
 			}
 		}
 		return false;
 		
 	}
-
 	
 	public void printTree() {
 		if (this.parent != null) {
@@ -179,6 +218,10 @@ public class Node {
 		}
 		return text;
 	}
+	
+	public boolean isLeaf() {
+		return leftChild == null && rightChild == null;
+	}
 
 	public int getValue() {
 		return value;
@@ -226,4 +269,10 @@ public class Node {
 		this.key = key;
 	}
 
+	@Override
+	public String toString() {
+		return "Node [key=" + key + ", value=" + value + "]";
+	}
+
+	
 }

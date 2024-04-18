@@ -8,12 +8,18 @@ import java.io.IOException;
 public class Program {
 
 	public static void main(String[] args) {
-		Node raiz = new Node("A", 82); //((int) (Math.random() * 100) + 1)
+		Node raiz = new Node("A", 82);
 		raiz.add("B", 47);
+		Node teste = new Node("teste", 60);
+		raiz.add(teste.getKey(), teste.getValue());
 		raiz.add("C", 53);
 		raiz.add("D", 48);
-		raiz.add("D", 28);
+		raiz.add("E", 28);
 		raiz.add("X", 30);
+		raiz.add("Y", 61);
+		raiz.add("Z", 54);
+		raiz.add("W", 20);
+		raiz.add("U", 100);
 		System.out.println(raiz.toString());
 		System.out.println(raiz.search(48));
 		System.out.println("\n" + "PreOrdem:");
@@ -27,28 +33,24 @@ public class Program {
 		System.out.println(raiz.printGraphviz(raiz, new StringBuilder()));
 		printSVG(raiz);
 		System.out.println("Escrita no .txt finalizada");
+
+		System.out.println("Pesquisas na arvore BST:");
 		
-		System.out.println("Buscar valor minino da BST: " + raiz.searchMin(raiz));
-		System.out.println("Buscar valor 30 na BST: " + raiz.search(30));
-		
-		
-//		System.out.println("Delecao da folha '48' " + raiz.simpleDelete(48));
-//		printSVG(raiz);
-		
-		System.out.println("Delecao da folha '53' " + raiz.deleteNode(53));
-		printSVG(raiz);
-		System.out.println("Delecao da folha '28' " + raiz.deleteNode(28));
-		printSVG(raiz);
-				
+		System.out.println("Busca valor 30: " + raiz.search(30));
+		System.out.println("Busca valor 31: " + raiz.search(31));
 		
 		
+	
+
+		System.out.println("\n" + raiz.printGraphviz(raiz, new StringBuilder()));
+
 	}
 
 	private static void printSVG(Node root) {
 
 		String path = "C:\\Program Files\\Graphviz\\GraphvizArquivos\\BinarySearchTree.txt";
 		File file = new File(path);
-		if(!file.exists()) {
+		if (!file.exists()) {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
@@ -73,13 +75,9 @@ public class Program {
 			writer.append("}");
 			writer.close();
 
-			
-
 		} catch (IOException e) {
 			System.out.println("Erro no arquivo!");
 		}
 	}
-
-	
 
 }
