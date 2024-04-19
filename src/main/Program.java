@@ -55,9 +55,11 @@ public class Program {
 		/*System.out.println("Remocao do nodo 60: " + raiz.deleteNode(60));
 		System.out.println("Remocao do nodo 58: " + raiz.deleteNode(58));
 		System.out.println("Remocao do nodo 57: " + raiz.deleteNode(57));
-		System.out.println("Remocao do nodo 47: " + raiz.deleteNode(47));
 		*/
+		System.out.println("Remocao do nodo 47: " + raiz.deleteNode(47));
+		
 		printSVG(raiz);
+		terminalProcess();
 		System.out.println("Escrita no .txt finalizada");
 		System.out.println("\n" + raiz.printGraphviz(raiz, new StringBuilder()));
 
@@ -95,6 +97,29 @@ public class Program {
 		} catch (IOException e) {
 			System.out.println("Erro no arquivo!");
 		}
+	}
+	
+	private static void terminalProcess() {
+		 try {
+	            String caminhoTxt = "C:\\Users\\giova\\eclipse-workspace\\BinarySearchTree\\GraphvizArquivos\\BinarySearchTree.txt";
+	            String caminhoSvg = "C:\\Users\\giova\\eclipse-workspace\\BinarySearchTree\\GraphvizArquivos\\BinarySearchTree.svg";
+	            String comando = "cmd /c dot -Tsvg \"" + caminhoTxt + "\" -o \"" + caminhoSvg + "\"";
+	            Process processo = Runtime.getRuntime().exec(comando);
+
+	            // Aguardar até que o comando seja concluído
+	            processo.waitFor();
+
+	            // Verificar se o processo foi concluído com sucesso
+	            int exitCode = processo.exitValue();
+	            if (exitCode == 0) {
+	                System.out.println("Comando executado com sucesso.");
+	            } else {
+	                System.out.println("Erro ao executar o comando. Código de saída: " + exitCode);
+	            }
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 	}
 
 }
