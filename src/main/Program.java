@@ -8,10 +8,14 @@ import java.io.IOException;
 public class Program {
 
 	public static void main(String[] args) {
-		Node raiz = new Node("A", 82);
-		raiz.add("B", 47);
-		Node teste = new Node("teste", 60);
-		raiz.add(teste.getKey(), teste.getValue());
+		Node raiz = new Node("A", (int) (Math.random() * 101));
+		
+		
+		for (int i = 0; i < 11; i++) {
+			addRandomChild(raiz);
+		}
+		
+		/*raiz.add("B", 47);
 		raiz.add("C", 53);
 		raiz.add("D", 48);
 		raiz.add("E", 28);
@@ -21,6 +25,11 @@ public class Program {
 		raiz.add("W", 20);
 		raiz.add("U", 100);
 		raiz.add("V", 57);
+		*/
+		
+		
+		Node teste = new Node("teste", 60);
+		raiz.add(teste.getKey(), teste.getValue());
 		System.out.println("\n" + "PreOrdem:");
 		raiz.printPreOrder(raiz);
 		System.out.println("\n" + "InOrdem:");
@@ -49,8 +58,8 @@ public class Program {
 		/*System.out.println("Teste de remocao:");
 		System.out.println("Removendo uma folha - 20: " + raiz.deleteNode(20));
 		System.out.println("Removendo um nodo que possui um filho - 28: " + raiz.deleteNode(28));
-		*/
 		System.out.println("Maior valor da subarvore esquerda do nodo 60: " + raiz.searchMaxValue(raiz.search(60).getLeftChild()));
+		*/
 		
 		/*System.out.println("Remocao do nodo 60: " + raiz.deleteNode(60));
 		System.out.println("Remocao do nodo 58: " + raiz.deleteNode(58));
@@ -106,10 +115,8 @@ public class Program {
 	            String comando = "cmd /c dot -Tsvg \"" + caminhoTxt + "\" -o \"" + caminhoSvg + "\"";
 	            Process processo = Runtime.getRuntime().exec(comando);
 
-	            // Aguardar até que o comando seja concluído
 	            processo.waitFor();
 
-	            // Verificar se o processo foi concluído com sucesso
 	            int exitCode = processo.exitValue();
 	            if (exitCode == 0) {
 	                System.out.println("Comando executado com sucesso.");
@@ -120,6 +127,16 @@ public class Program {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
+	}
+	
+	private static void addRandomChild(Node root) {
+		
+        char randomChar = (char) (Math.random() * 26 + 'A');
+        String randomKey = String.valueOf(randomChar);
+
+        int randomValue = (int) (Math.random() * 100);
+
+        root.add(randomKey, randomValue);
 	}
 
 }
