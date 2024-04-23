@@ -10,16 +10,16 @@ public class Program {
 	public static void main(String[] args) {
 		Node raiz = new Node("A", 25);
 		
-		raiz.add("B", 65);
-		raiz.add("C", 95);
-		raiz.add("D", 84);
-		raiz.add("E", 28);
+		raiz.add("B", 20);
+		raiz.add("C", 91);
+		raiz.add("D", 48);
+		raiz.add("E", 23);
 		raiz.add("X", 14);
-		raiz.add("Y", 4);
-		raiz.add("Z", 33);
-		raiz.add("W", 29);
+		raiz.add("Y", 100);
+		raiz.add("Z", 120);
+		raiz.add("W", 97);
 		raiz.add("U", 6);
-		raiz.add("V", 71);
+		raiz.add("V", 19);
 		
 		System.out.println("\n" + "PreOrdem:");
 		raiz.printPreOrder(raiz);
