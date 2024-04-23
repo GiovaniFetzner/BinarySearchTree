@@ -8,14 +8,9 @@ import java.io.IOException;
 public class Program {
 
 	public static void main(String[] args) {
-		Node raiz = new Node("A", (int) (Math.random() * 101));
+		Node raiz = new Node("A", 35);
 		
-		
-		for (int i = 0; i < 11; i++) {
-			addRandomChild(raiz);
-		}
-		
-		/*raiz.add("B", 47);
+		raiz.add("B", 47);
 		raiz.add("C", 53);
 		raiz.add("D", 48);
 		raiz.add("E", 28);
@@ -25,8 +20,6 @@ public class Program {
 		raiz.add("W", 20);
 		raiz.add("U", 100);
 		raiz.add("V", 57);
-		*/
-		
 		
 		Node teste = new Node("teste", 60);
 		raiz.add(teste.getKey(), teste.getValue());
@@ -55,17 +48,8 @@ public class Program {
 		System.out.println("Maior valor da subarvore 47 (existente): " + raiz.searchMaxValue(new Node("B", 47)));
 		System.out.println("Maior valor da subarvore 200 (inexistente): " + raiz.searchMaxValue(new Node("brazil", 200)));
 		
-		/*System.out.println("Teste de remocao:");
-		System.out.println("Removendo uma folha - 20: " + raiz.deleteNode(20));
-		System.out.println("Removendo um nodo que possui um filho - 28: " + raiz.deleteNode(28));
-		System.out.println("Maior valor da subarvore esquerda do nodo 60: " + raiz.searchMaxValue(raiz.search(60).getLeftChild()));
-		*/
-		
-		/*System.out.println("Remocao do nodo 60: " + raiz.deleteNode(60));
-		System.out.println("Remocao do nodo 58: " + raiz.deleteNode(58));
-		System.out.println("Remocao do nodo 57: " + raiz.deleteNode(57));
-		*/
-		System.out.println("Remocao do nodo 47: " + raiz.deleteNode(47));
+		raiz.deleteNode(58);
+		raiz.deleteNode(57);
 		
 		printSVG(raiz);
 		terminalProcess();
