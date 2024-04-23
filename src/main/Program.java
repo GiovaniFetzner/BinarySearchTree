@@ -8,18 +8,18 @@ import java.io.IOException;
 public class Program {
 
 	public static void main(String[] args) {
-		Node raiz = new Node("A", 70);
+		Node raiz = new Node("A", 25);
 		
-		raiz.add("B", 82);
-		raiz.add("C", 15);
-		raiz.add("D", 48);
+		raiz.add("B", 65);
+		raiz.add("C", 95);
+		raiz.add("D", 84);
 		raiz.add("E", 28);
-		raiz.add("X", 104);
-		raiz.add("Y", 22);
-		raiz.add("Z", 58);
-		raiz.add("W", 20);
+		raiz.add("X", 14);
+		raiz.add("Y", 4);
+		raiz.add("Z", 33);
+		raiz.add("W", 29);
 		raiz.add("U", 6);
-		raiz.add("V", 73);
+		raiz.add("V", 71);
 		
 		System.out.println("\n" + "PreOrdem:");
 		raiz.printPreOrder(raiz);
