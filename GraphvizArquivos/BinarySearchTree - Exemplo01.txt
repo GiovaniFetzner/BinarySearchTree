@@ -2,15 +2,14 @@ digraph ArvoreBinaria {
     nodesep = 0.5;
     node [shape="circle", style="filled", color="black", fillcolor="#9370DB"];
     edge [color="black"];
-70 -> 15
-70 -> 82
-15 -> 6
-15 -> 48
-48 -> 28
-48 -> 58
-28 -> 22
-22 -> 20
-82 -> 73
-82 -> 104
+35 -> 28
+35 -> 47
+28 -> 20
+28 -> 30
+47 -> 53
+53 -> 48
+53 -> 61
+61 -> 60
+61 -> 100
 
 }
