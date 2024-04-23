@@ -20,6 +20,10 @@ public class Program {
 		raiz.add("W", 97);
 		raiz.add("U", 6);
 		raiz.add("V", 19);
+		raiz.add("S", 42);
+		raiz.add("T", 63);
+		raiz.add("M", 21);
+		raiz.add("N", 24);
 		
 		System.out.println("\n" + "PreOrdem:");
 		raiz.printPreOrder(raiz);
